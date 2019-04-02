@@ -28,14 +28,11 @@ namespace memebomb_forms
             memes.Add(images.VegNewsMeme);
 
             progressBar1.Value = 10;
-
-            JObject x = RedditMemesParser.Json("");
-            int y = x["data"]["children"].Children().Count();
-            JToken[] z = x["data"]["children"].Children().ToArray();
-            
-            var list = RedditMemesParser.Urls(z);
-
-            progressBar1.Value = 50;
+            this.Show();
+            List<string> list = new List<string>();
+            list.AddRange(AddToMemes("https://api.reddit.com/r/memes"));
+            list.AddRange(AddToMemes("https://api.reddit.com/r/dankmemes"));
+            list.AddRange(AddToMemes("https://api.reddit.com/r/kanye"));
 
             fuckinImages(list.ToArray());
         }
@@ -64,6 +61,16 @@ namespace memebomb_forms
                 });
             }
             this.Hide();
+        }
+
+        private List<string> AddToMemes(string url)
+        {
+            JObject x = RedditMemesParser.Json(url);
+            JToken[] z = x["data"]["children"].Children().ToArray();
+
+            var list = RedditMemesParser.Urls(z);
+
+            return list;
         }
     }
 }

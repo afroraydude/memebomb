@@ -18,7 +18,7 @@ namespace memebomb_forms.Internal
             string webData; 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("User-Agent", "MockClient/0.1 by Me");
+                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36");
                 webData =  client.GetStringAsync(getUrl).GetAwaiter().GetResult();
             }
                  
